@@ -1,0 +1,1 @@
+export default function LoadingSkeleton() { return <div className="news-card skeleton-card"><div className="skeleton skeleton-image" /><div className="skeleton skeleton-line wide" /><div className="skeleton skeleton-line" /><div className="skeleton skeleton-line short" /></div>; }
