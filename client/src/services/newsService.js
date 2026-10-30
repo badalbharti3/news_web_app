@@ -1,7 +1,7 @@
-import axios from 'axios';
+import api from './api';
 
-const NEWS_API_URL = 'https://briefly-newsapp.onrender.com/api/news';
-const newsApi = axios.create({ baseURL: NEWS_API_URL, withCredentials: true });
-
-export const getHeadlines = (page = 1) => newsApi.get('', { params: { page } }).then(r => r.data.news);
-export const getArticle = (id, page = 1) => newsApi.get(`/${encodeURIComponent(id)}`, { params: { page } }).then(r => r.data.news);
+// Headlines and article details are served by the backend proxy so the news
+// provider key stays server-side. Sharing the api instance keeps a single,
+// configurable base URL for every request (auth included).
+export const getHeadlines = (page = 1) => api.get('/news', { params: { page } }).then(r => r.data.news);
+export const getArticle = (id, page = 1) => api.get(`/news/${encodeURIComponent(id)}`, { params: { page } }).then(r => r.data.news);
