@@ -105,26 +105,28 @@ export default function Home() {
         </article>
       )}
 
-      <aside className="hero-rail">
+      <aside className="hero-rail" aria-label="More stories in this edition">
         <span className="rail-label">Also in this edition</span>
-        {rail.map(item => (
-          <article
-            key={item.id}
-            className="rail-story"
-            onClick={() => open(item)}
-            tabIndex={0}
-            onKeyDown={e => { if (e.key === 'Enter') open(item); }}
-          >
-            <div className={item.image ? 'rail-thumb' : 'rail-thumb placeholder'}>
-              {item.image ? <img src={item.image} alt={item.title} loading="lazy" /> : <span>BRIEFLY</span>}
-            </div>
-            <div className="rail-body">
-              <span className="category">{item.category || item.source}</span>
-              <h3>{item.title}</h3>
-              <div className="meta"><Clock3 size={12} /> <span>{item.date}</span></div>
-            </div>
-          </article>
-        ))}
+        <div className="rail-track">
+          {rail.map(item => (
+            <article
+              key={item.id}
+              className="rail-story"
+              onClick={() => open(item)}
+              tabIndex={0}
+              onKeyDown={e => { if (e.key === 'Enter') open(item); }}
+            >
+              <div className={item.image ? 'rail-thumb' : 'rail-thumb placeholder'}>
+                {item.image ? <img src={item.image} alt={item.title} loading="lazy" /> : <span>BRIEFLY</span>}
+              </div>
+              <div className="rail-body">
+                <span className="category">{item.category || item.source}</span>
+                <h3>{item.title}</h3>
+                <div className="meta"><Clock3 size={12} /> <span>{item.date}</span></div>
+              </div>
+            </article>
+          ))}
+        </div>
         <div className="rail-note">
           <ShieldCheck size={18} />
           <span>Headlines are free to browse.<br /><strong>Sign in</strong> to read a story in full.</span>

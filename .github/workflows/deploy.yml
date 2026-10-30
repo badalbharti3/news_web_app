@@ -30,7 +30,8 @@ jobs:
         run: npm run build --prefix client
         env:
           BASE_PATH: /news_web_app/
-          VITE_API_BASE_URL: https://briefly-newsapp.onrender.com/api
+          VITE_API_BASE_URL: https://briefly-newsapp.onrender.com/api/news
+          
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -6,18 +6,21 @@ import { Search, X } from 'lucide-react';
 export default function SearchOverlay({ onClose }) {
   const navigate = useNavigate();
   const inputRef = useRef(null);
+  const closeRef = useRef(onClose);
   const [term, setTerm] = useState('');
+  closeRef.current = onClose;
 
+  // Focus the field once, then keep the page still while the sheet is open.
   useEffect(() => {
     inputRef.current?.focus();
-    const onKey = e => { if (e.key === 'Escape') onClose(); };
+    const onKey = e => { if (e.key === 'Escape') closeRef.current(); };
     window.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
     return () => {
       window.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
-  }, [onClose]);
+  }, []);
 
   const submit = e => {
     e.preventDefault();
@@ -41,6 +44,9 @@ export default function SearchOverlay({ onClose }) {
             onChange={e => setTerm(e.target.value)}
             placeholder="Search headlines, sources…"
             autoComplete="off"
+            autoCapitalize="off"
+            spellCheck={false}
+            enterKeyHint="search"
           />
           <button type="button" className="search-close" onClick={onClose} aria-label="Close search"><X size={20} /></button>
         </div>
